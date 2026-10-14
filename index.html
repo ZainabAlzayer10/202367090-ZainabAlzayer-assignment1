@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+      name="description"
+      content="Personal portfolio website for Zainab Alzayer"
+    >
+
+    <title>Zainab Alzayer | Personal Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    >
+
+    <!-- Website stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Website JavaScript -->
+    <script src="js/script.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Main navigation -->
+    <header class="site-header">
+      <nav class="nav container" aria-label="Main navigation">
+        <a class="logo" href="#home">
+          ZA<span>.</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            type="button"
+            aria-label="Switch to dark mode"
+          >
+            ◐
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero section -->
+      <section id="home" class="hero container">
+        <div class="hero-copy">
+          <p class="eyebrow" id="greeting">Hello, I am</p>
+
+          <h1>
+            Zainab Alzayer
+            <br>
+            <span>creative developer.</span>
+          </h1>
+
+          <p class="hero-text">
+            I turn ideas into interactive experiences through code, design, and creativity.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button primary" href="#projects">
+              View my work ↗
+            </a>
+
+            <a class="button secondary" href="#contact">
+              Let's talk
+            </a>
+          </div>
+        </div>
+
+        <!-- Decorative hero illustration -->
+        <div
+          class="hero-art"
+          role="img"
+          aria-label="Abstract profile illustration"
+        >
+          <div class="sun"></div>
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="initials">ZA</div>
+          <span class="spark spark-one">✦</span>
+          <span class="spark spark-two">✳</span>
+        </div>
+      </section>
+
+      <!-- About section -->
+      <section id="about" class="section container two-column">
+        <div>
+          <p class="eyebrow">01 / About me</p>
+
+          <h2>
+            Building ideas
+            <br>
+            <em>into experiences.</em>
+          </h2>
+        </div>
+
+        <div class="section-copy">
+          <p>
+            I am a Computer Science student passionate about technology, game
+            development, and creative digital experiences. I enjoy turning
+            ideas into interactive projects while continuously learning and
+            exploring new technologies.
+          </p>
+
+          <p>
+            When I am away from my screen, I enjoy reading books, exploring
+            creative ideas, learning Japanese, and discovering new games and
+            stories that inspire my next project.
+          </p>
+
+          <div class="skill-list">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>Python</span>
+            <span>Java</span>
+            <span>GDScript</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects section -->
+      <section id="projects" class="section projects-section">
+        <div class="container">
+          <p class="eyebrow">02 / Selected projects</p>
+
+          <div class="section-heading">
+            <h2>
+              A few things
+              <br>
+              <em>I have made.</em>
+            </h2>
+
+            <p>
+              Small projects are where I practise, experiment, and improve.
+            </p>
+          </div>
+
+          <div class="project-grid">
+            <!-- Farm game project -->
+            <article class="project-card">
+              <div class="project-image image-one">
+                <span>01</span>
+
+                <img
+                  src="assets/farm-adventure.png"
+                  alt="Screenshot of a pixel-art farming adventure game"
+                >
+              </div>
+
+              <div class="project-info">
+                <div>
+                  <h3>Farm Adventure Game</h3>
+
+                  <p>
+                    A 2D farming adventure game currently under development
+                    using Godot. The game includes pixel-art environments,
+                    platforms, characters, and interactive elements.
+                  </p>
+
+                </div>
+
+                <span class="project-arrow" aria-hidden="true">↗</span>
+              </div>
+            </article>
+
+            <!-- Platform game project -->
+            <article class="project-card">
+              <div class="project-image image-two">
+                <span>02</span>
+
+                <img
+                  src="assets/platform-game.png"
+                  alt="Screenshot of a pixel-art 2D platform game"
+                >
+              </div>
+
+              <div class="project-info">
+                <div>
+                  <h3>2D Platform Game</h3>
+
+                  <p>
+                    A 2D platform game currently under development using
+                    Godot. The game includes a pixel-art character, platforms,
+                    and obstacles.
+                  </p>
+
+                </div>
+
+                <span class="project-arrow" aria-hidden="true">↗</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact section -->
+      <section id="contact" class="section container contact-section">
+        <div>
+          <p class="eyebrow">03 / Contact</p>
+
+          <h2>
+            Have an idea?
+            <br>
+            <em>Let's talk.</em>
+          </h2>
+
+          <p class="contact-note">
+            I am always open to learning, collaborating, and hearing about
+            interesting projects.
+          </p>
+        </div>
+
+        <form id="contact-form" class="contact-form">
+          <label for="name">Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="Your name"
+            required
+          >
+
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="you@example.com"
+            required
+          >
+
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Tell me about your idea..."
+            required
+          ></textarea>
+
+          <button class="button primary" type="submit">
+            Send message ↗
+          </button>
+
+          <p id="form-message" class="form-message" role="status"></p>
+        </form>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <span>© 2026 Zainab Alzayer</span>
+        <span>Built with HTML, CSS &amp; JavaScript</span>
+      </div>
+    </footer>
+  </body>
+</html>
