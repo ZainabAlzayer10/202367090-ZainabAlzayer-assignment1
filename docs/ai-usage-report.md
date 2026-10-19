@@ -3,7 +3,7 @@
 ## Student information
 
 - **Name:** Zainab Alzayer
-- **Student ID:** 202319999
+- **Student ID:** 2023367090
 - **Assignment:** Assignment 2 — Interactive Features
 - **Date:** 2026-10-19
 
@@ -36,5 +36,5 @@ I verified the work by opening `index.html` in a browser, testing the project fi
 > I declare that this report and the attached evidence document all of my AI use in this assignment, with complete and unedited conversations, and that I understand and can explain all the code I submitted. I understand that undeclared AI use or a false declaration will be treated as plagiarism according to KFUPM regulations.
 
 **Name:** Zainab Alzayer  
-**Student ID:** 202367090 
+**Student ID:** 202367090
 **Date:** 2026-10-19
