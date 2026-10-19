@@ -327,11 +327,12 @@ h2 {
   padding: 1rem;
   border-radius: 1rem;
   background: var(--surface);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-card.hidden {
-  display: none;
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
 }
 
 .project-image {
@@ -437,6 +438,22 @@ h2 {
   font-size: 0.9rem;
 }
 
+.form-message.success,
+.form-message.error {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.form-message.success {
+  background: #dff3e4;
+  color: #236b3b;
+}
+
+.form-message.error {
+  background: #fde3df;
+  color: #9d2f20;
+}
+
 /* Footer */
 .footer {
   padding: 1.5rem 0;
@@ -534,13 +551,4 @@ body.dark {
     display: block;
     margin: 0.25rem 0;
   }
-}
-
-.project-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-}
-
-.project-card:hover {
-  transform: translateY(-10px) !important;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25) !important;
 }
