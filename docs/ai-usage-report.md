@@ -1,25 +1,40 @@
 # AI Usage Report
 
-## Tools used and use cases
+## Student information
 
-I used ChatGPT as an AI-assisted development tool during this assignment. I used it to:
+- **Name:** Zainab Alzayer
+- **Student ID:** 202319999
+- **Assignment:** Assignment 2 — Interactive Features
+- **Date:** 2026-10-19
 
-- plan the semantic HTML structure and the three required sections;
-- suggest a clean responsive layout using CSS Grid and Flexbox;
-- generate a starting point for the theme toggle, mobile menu, greeting, and form feedback;
-- explain how JavaScript event listeners and `localStorage` work;
-- review the README and technical documentation for completeness.
+## Tools used
 
-## Benefits and challenges
+I used ChatGPT as an AI-assisted development and learning tool. I used it to understand the assignment requirements, review my Assignment 1 portfolio, plan project filtering, improve contact form validation, suggest CSS animations, update documentation, and explain how to test the website.
 
-AI helped me start faster, compare different implementation ideas, and understand unfamiliar syntax. It also helped me remember accessibility details such as labels, button states, and alternative text.
+## Usage log
 
-The main challenge was that AI suggestions can be generic or make assumptions about personal information. I had to replace placeholder content, check that the code matched the assignment, and test the interactions instead of accepting every suggestion automatically.
+| ID | Tool (model) | Date | Purpose | Files affected | What you changed and how you verified it |
+|---|---|---|---|---|---|
+| C01 | ChatGPT | 2026-10-19 | Review Assignment 1 and plan Assignment 2 features | `index.html`, `css/styles.css`, `js/script.js` | I selected project categories that fit my actual projects: Adventure and Platform. I reviewed the suggested structure and tested the website locally. |
+| C02 | ChatGPT | 2026-10-19 | Add project filtering | `index.html`, `css/styles.css`, `js/script.js` | I added All, Adventure, and Platform buttons, added `data-category` attributes, and verified that the buttons show and hide the correct project cards. |
+| C03 | ChatGPT | 2026-10-19 | Improve contact form validation | `js/script.js`, `css/styles.css` | I added checks for empty fields and invalid email addresses, then tested empty, invalid, and valid form inputs. |
+| C04 | ChatGPT | 2026-10-19 | Improve animations and transitions | `css/styles.css` | I reviewed existing transitions and added project-card hover effects, card appearance animation, and animated form feedback messages. |
+| C05 | ChatGPT | 2026-10-19 | Update project documentation | `README.md`, `docs/technical-documentation.md` | I updated the project description, features, setup instructions, implementation details, and testing checklist. |
 
-## Learning outcomes
+## What I changed myself
 
-I learned how to connect an HTML form to JavaScript, use CSS custom properties for themes, store a preference with `localStorage`, create responsive breakpoints, and organise a small front-end project into separate files.
+I chose the project filter categories based on my actual projects and changed the wording of the user-facing messages. I reviewed the suggested code, placed each part in the correct file, tested the interactions, and corrected formatting and file-path issues.
 
-## Responsible use and modifications
+## Understanding and verification
 
-I treated AI output as a starting point rather than a final submission. I read and modified the code, chose the final visual design, added comments, replaced placeholder content, checked the responsive layout, and verified that the JavaScript matched my own understanding. I will personalise the name, projects, colours, and text before submission.
+I understand that the filter buttons use JavaScript event listeners, `data-filter` values, and `data-category` values to decide which project cards are visible. I understand that the contact form uses JavaScript to validate input and display feedback without sending data to a server. I also understand that CSS transitions and keyframe animations control the visual effects.
+
+I verified the work by opening `index.html` in a browser, testing the project filters, testing the theme toggle, submitting the form with different inputs, checking the responsive layout, and running `node --check js/script.js`.
+
+## Declaration
+
+> I declare that this report and the attached evidence document all of my AI use in this assignment, with complete and unedited conversations, and that I understand and can explain all the code I submitted. I understand that undeclared AI use or a false declaration will be treated as plagiarism according to KFUPM regulations.
+
+**Name:** Zainab Alzayer  
+**Student ID:** 202367090 
+**Date:** 2026-10-19
