@@ -5,6 +5,8 @@ const themeToggle = document.querySelector('#theme-toggle');
 const greeting = document.querySelector('#greeting');
 const contactForm = document.querySelector('#contact-form');
 const formMessage = document.querySelector('#form-message');
+const filterButtons = document.querySelectorAll('.filter-button');
+const projectCards = document.querySelectorAll('.project-card');
 
 menuToggle.addEventListener('click', () => {
   const isOpen = navLinks.classList.toggle('open');
@@ -13,6 +15,23 @@ menuToggle.addEventListener('click', () => {
 
 document.querySelectorAll('.nav-links a').forEach((link) => {
   link.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+filterButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const selectedFilter = button.dataset.filter;
+
+    filterButtons.forEach((filterButton) => {
+      filterButton.classList.toggle('active', filterButton === button);
+    });
+
+    projectCards.forEach((card) => {
+      const shouldShow = selectedFilter === 'all'
+        || card.dataset.category === selectedFilter;
+
+      card.classList.toggle('hidden', !shouldShow);
+    });
+  });
 });
 
 const savedTheme = localStorage.getItem('portfolio-theme');

@@ -156,9 +156,21 @@
             </p>
           </div>
 
+          <div class="project-filters" aria-label="Filter projects">
+            <button class="filter-button active" type="button" data-filter="all">
+              All
+            </button>
+            <button class="filter-button" type="button" data-filter="adventure">
+              Adventure
+            </button>
+            <button class="filter-button" type="button" data-filter="platform">
+              Platform
+            </button>
+          </div>
+
           <div class="project-grid">
             <!-- Farm game project -->
-            <article class="project-card">
+            <article class="project-card" data-category="adventure">
               <div class="project-image image-one">
                 <span>01</span>
 
@@ -185,7 +197,7 @@
             </article>
 
             <!-- Platform game project -->
-            <article class="project-card">
+            <article class="project-card" data-category="platform">
               <div class="project-image image-two">
                 <span>02</span>
 
