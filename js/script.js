@@ -114,7 +114,7 @@ contactForm.addEventListener('submit', (event) => {
   }
 
   formMessage.textContent =
-    'Thanks! Your message is ready to send (demo only).';
+    'Thanks! Your message is ready to send.';
 
   formMessage.classList.add('success');
 
