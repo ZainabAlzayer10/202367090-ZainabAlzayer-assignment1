@@ -535,3 +535,12 @@ body.dark {
     margin: 0.25rem 0;
   }
 }
+
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.project-card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25) !important;
+}
