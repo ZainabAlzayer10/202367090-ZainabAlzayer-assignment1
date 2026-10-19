@@ -1,6 +1,6 @@
-# Assignment 1 — Personal Portfolio
+# Assignment 2 — Interactive Personal Portfolio
 
-A responsive personal portfolio website built with HTML, CSS, and JavaScript. It includes an About section, two sample projects, a contact form, a mobile navigation menu, a time-based greeting, and a light/dark theme toggle.
+A responsive and interactive personal portfolio website built with HTML, CSS, and JavaScript. This project improves the Assignment 1 portfolio by adding project filtering, contact form validation, user feedback, and animations.
 
 ## Run locally
 
@@ -9,18 +9,26 @@ A responsive personal portfolio website built with HTML, CSS, and JavaScript. It
 
 No installation or backend is required. The contact form is a front-end demo and does not send data.
 
+## Interactive features
+
+- Filter projects by **All**, **Adventure**, or **Platform**.
+- Toggle between light and dark mode.
+- Save the selected theme using `localStorage`.
+- Display a greeting based on the visitor's local time.
+- Validate the contact form and show success or error feedback.
+- Use hover effects, smooth scrolling, and animated messages.
+
 ## Folder structure
 
 ```text
-assignment-1/
-├── assests
+assignment-2/
+├── assets
 ├── index.html
 ├── css/styles.css
 ├── js/script.js
 ├── docs/ai-usage-report.md
 ├── docs/technical-documentation.md
 └── .gitignore
-```
 
 ## AI use
 
@@ -28,4 +36,4 @@ ChatGPT was used for planning the page structure, suggesting responsive CSS patt
 
 ## Deployment
 
-The site can be published with GitHub Pages by enabling Pages for the repository's `main` branch.
+The site can be published with GitHub Pages by enabling Pages for the repository's main branch.
