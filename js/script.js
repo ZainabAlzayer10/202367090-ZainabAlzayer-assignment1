@@ -9,7 +9,9 @@ const contactForm = document.querySelector('#contact-form');
 const formMessage = document.querySelector('#form-message');
 
 const filterButtons = document.querySelectorAll('.filter-button');
-const projectCards = document.querySelectorAll('.project-card');
+const projectCards = document.querySelectorAll(
+  '.project-card[data-category]'
+);
 
 // Mobile menu
 menuToggle.addEventListener('click', () => {
@@ -31,35 +33,48 @@ document.querySelectorAll('.nav-links a').forEach((link) => {
   });
 });
 
-// Project filtering
+// Project filtering and saved filter state
+const savedFilter =
+  localStorage.getItem('project-filter') || 'all';
+
+function applyProjectFilter(selectedFilter) {
+  filterButtons.forEach((filterButton) => {
+    filterButton.classList.toggle(
+      'active',
+      filterButton.dataset.filter === selectedFilter
+    );
+  });
+
+  projectCards.forEach((card) => {
+    const projectCategory = card.dataset.category;
+
+    const shouldShow =
+      selectedFilter === 'all' ||
+      projectCategory === selectedFilter;
+
+    card.classList.toggle('hidden', !shouldShow);
+  });
+
+  localStorage.setItem('project-filter', selectedFilter);
+}
+
 filterButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    const selectedFilter = button.dataset.filter;
-
-    filterButtons.forEach((filterButton) => {
-      filterButton.classList.toggle(
-        'active',
-        filterButton === button
-      );
-    });
-
-    projectCards.forEach((card) => {
-      const projectCategory = card.dataset.category;
-      const shouldShow =
-        selectedFilter === 'all' ||
-        projectCategory === selectedFilter;
-
-      card.classList.toggle('hidden', !shouldShow);
-    });
+    applyProjectFilter(button.dataset.filter);
   });
 });
+
+applyProjectFilter(savedFilter);
 
 // Dark mode preference
 const savedTheme = localStorage.getItem('portfolio-theme');
 
 if (savedTheme === 'dark') {
   document.body.classList.add('dark');
-  themeToggle.setAttribute('aria-label', 'Switch to light mode');
+  themeToggle.setAttribute(
+    'aria-label',
+    'Switch to light mode'
+  );
 }
 
 themeToggle.addEventListener('click', () => {
@@ -122,13 +137,27 @@ contactForm.addEventListener('submit', (event) => {
 });
 
 // GitHub API integration and project sorting
-const githubProjectGrid = document.querySelector('#github-project-grid');
-const githubLoading = document.querySelector('#github-loading');
-const githubError = document.querySelector('#github-error');
-const sortButtons = document.querySelectorAll('.sort-button');
+const githubProjectGrid = document.querySelector(
+  '#github-project-grid'
+);
+
+const githubLoading = document.querySelector(
+  '#github-loading'
+);
+
+const githubError = document.querySelector(
+  '#github-error'
+);
+
+const sortButtons = document.querySelectorAll(
+  '.sort-button'
+);
 
 const githubUsername = 'ZainabAlzayer10';
 let githubRepositories = [];
+
+const savedSort =
+  localStorage.getItem('github-sort') || 'updated';
 
 async function loadGitHubProjects() {
   try {
@@ -145,12 +174,14 @@ async function loadGitHubProjects() {
     githubLoading.hidden = true;
 
     if (githubRepositories.length === 0) {
-      githubError.textContent = 'No public GitHub projects were found.';
+      githubError.textContent =
+        'No public GitHub projects were found.';
+
       githubError.hidden = false;
       return;
     }
 
-    displayGitHubProjects(githubRepositories);
+    applyGitHubSort(savedSort);
   } catch (error) {
     githubLoading.hidden = true;
     githubError.hidden = false;
@@ -163,7 +194,8 @@ function displayGitHubProjects(repositories) {
   repositories.forEach((repository, index) => {
     const projectCard = document.createElement('article');
 
-    projectCard.className = 'project-card github-project-card';
+    projectCard.className =
+      'project-card github-project-card';
 
     projectCard.innerHTML = `
       <div class="project-info">
@@ -205,37 +237,50 @@ function displayGitHubProjects(repositories) {
   });
 }
 
+function applyGitHubSort(selectedSort) {
+  const sortedRepositories = [
+    ...githubRepositories
+  ];
+
+  sortButtons.forEach((sortButton) => {
+    sortButton.classList.toggle(
+      'active',
+      sortButton.dataset.sort === selectedSort
+    );
+  });
+
+  localStorage.setItem(
+    'github-sort',
+    selectedSort
+  );
+
+  if (selectedSort === 'stars') {
+    sortedRepositories.sort(
+      (firstRepository, secondRepository) =>
+        secondRepository.stargazers_count -
+        firstRepository.stargazers_count
+    );
+  } else if (selectedSort === 'name') {
+    sortedRepositories.sort(
+      (firstRepository, secondRepository) =>
+        firstRepository.name.localeCompare(
+          secondRepository.name
+        )
+    );
+  } else {
+    sortedRepositories.sort(
+      (firstRepository, secondRepository) =>
+        new Date(secondRepository.updated_at) -
+        new Date(firstRepository.updated_at)
+    );
+  }
+
+  displayGitHubProjects(sortedRepositories);
+}
+
 sortButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    const selectedSort = button.dataset.sort;
-    const sortedRepositories = [...githubRepositories];
-
-    sortButtons.forEach((sortButton) => {
-      sortButton.classList.toggle(
-        'active',
-        sortButton === button
-      );
-    });
-
-    if (selectedSort === 'stars') {
-      sortedRepositories.sort(
-        (firstRepository, secondRepository) =>
-          secondRepository.stargazers_count -
-          firstRepository.stargazers_count
-      );
-    } else if (selectedSort === 'name') {
-      sortedRepositories.sort((firstRepository, secondRepository) =>
-        firstRepository.name.localeCompare(secondRepository.name)
-      );
-    } else {
-      sortedRepositories.sort(
-        (firstRepository, secondRepository) =>
-          new Date(secondRepository.updated_at) -
-          new Date(firstRepository.updated_at)
-      );
-    }
-
-    displayGitHubProjects(sortedRepositories);
+    applyGitHubSort(button.dataset.sort);
   });
 });
 
