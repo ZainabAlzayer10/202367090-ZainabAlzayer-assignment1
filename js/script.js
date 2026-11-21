@@ -121,12 +121,14 @@ contactForm.addEventListener('submit', (event) => {
   contactForm.reset();
 });
 
-// Load public GitHub repositories
+// GitHub API integration and project sorting
 const githubProjectGrid = document.querySelector('#github-project-grid');
 const githubLoading = document.querySelector('#github-loading');
 const githubError = document.querySelector('#github-error');
+const sortButtons = document.querySelectorAll('.sort-button');
 
 const githubUsername = 'ZainabAlzayer10';
+let githubRepositories = [];
 
 async function loadGitHubProjects() {
   try {
@@ -138,62 +140,103 @@ async function loadGitHubProjects() {
       throw new Error('GitHub API request failed');
     }
 
-    const repositories = await response.json();
+    githubRepositories = await response.json();
 
     githubLoading.hidden = true;
 
-    if (repositories.length === 0) {
+    if (githubRepositories.length === 0) {
       githubError.textContent = 'No public GitHub projects were found.';
       githubError.hidden = false;
       return;
     }
 
-    repositories.forEach((repository, index) => {
-      const projectCard = document.createElement('article');
-      projectCard.className = 'project-card github-project-card';
-
-      projectCard.innerHTML = `
-        <div class="project-info">
-          <div>
-            <span class="github-project-number">
-              ${String(index + 1).padStart(2, '0')}
-            </span>
-
-            <h3>${repository.name}</h3>
-
-            <p>
-              ${repository.description || 'No description available.'}
-            </p>
-
-            <div class="project-tags">
-              <span class="project-tag">
-                ${repository.language || 'Code'}
-              </span>
-
-              <span class="project-tag">
-                ★ ${repository.stargazers_count}
-              </span>
-            </div>
-          </div>
-
-          <a
-            class="project-arrow"
-            href="${repository.html_url}"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View ${repository.name} on GitHub"
-          >
-            ↗
-          </a>
-        </div>
-      `;
-
-      githubProjectGrid.appendChild(projectCard);
-    });
+    displayGitHubProjects(githubRepositories);
   } catch (error) {
     githubLoading.hidden = true;
     githubError.hidden = false;
   }
 }
+
+function displayGitHubProjects(repositories) {
+  githubProjectGrid.innerHTML = '';
+
+  repositories.forEach((repository, index) => {
+    const projectCard = document.createElement('article');
+
+    projectCard.className = 'project-card github-project-card';
+
+    projectCard.innerHTML = `
+      <div class="project-info">
+        <div>
+          <span class="github-project-number">
+            ${String(index + 1).padStart(2, '0')}
+          </span>
+
+          <h3>${repository.name}</h3>
+
+          <p>
+            ${repository.description || 'No description available.'}
+          </p>
+
+          <div class="project-tags">
+            <span class="project-tag">
+              ${repository.language || 'Code'}
+            </span>
+
+            <span class="project-tag">
+              ★ ${repository.stargazers_count}
+            </span>
+          </div>
+        </div>
+
+        <a
+          class="project-arrow"
+          href="${repository.html_url}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View ${repository.name} on GitHub"
+        >
+          ↗
+        </a>
+      </div>
+    `;
+
+    githubProjectGrid.appendChild(projectCard);
+  });
+}
+
+sortButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const selectedSort = button.dataset.sort;
+    const sortedRepositories = [...githubRepositories];
+
+    sortButtons.forEach((sortButton) => {
+      sortButton.classList.toggle(
+        'active',
+        sortButton === button
+      );
+    });
+
+    if (selectedSort === 'stars') {
+      sortedRepositories.sort(
+        (firstRepository, secondRepository) =>
+          secondRepository.stargazers_count -
+          firstRepository.stargazers_count
+      );
+    } else if (selectedSort === 'name') {
+      sortedRepositories.sort((firstRepository, secondRepository) =>
+        firstRepository.name.localeCompare(secondRepository.name)
+      );
+    } else {
+      sortedRepositories.sort(
+        (firstRepository, secondRepository) =>
+          new Date(secondRepository.updated_at) -
+          new Date(firstRepository.updated_at)
+      );
+    }
+
+    displayGitHubProjects(sortedRepositories);
+  });
+});
 
 loadGitHubProjects();

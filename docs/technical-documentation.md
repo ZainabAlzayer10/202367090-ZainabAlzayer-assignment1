@@ -20,6 +20,7 @@
 8. Public GitHub repositories are loaded dynamically using the GitHub API.
 9. Loading and error messages are displayed during the API request.
 10. Smooth scrolling, hover effects, and animated feedback messages improve the user experience.
+11. GitHub projects can be sorted by update date, number of stars, or project name.
 
 ## GitHub API Integration
 
