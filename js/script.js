@@ -1,5 +1,6 @@
 // Portfolio interactions: mobile menu, theme preference,
-// greeting, project filtering, and contact form feedback.
+// greeting, project filtering, contact form validation,
+// GitHub API integration, and project sorting.
 
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');

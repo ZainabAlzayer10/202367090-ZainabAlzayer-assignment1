@@ -116,6 +116,9 @@ The form is a front-end demo and does not send data to a backend server.
 - Confirmed that the loading message appears before the API data is displayed.
 - Tested the API error message by checking the behavior when the request fails.
 - Confirmed that each GitHub project link opens the correct repository in a new tab.
+- Tested project images using lazy loading and asynchronous decoding.
+- Confirmed that project images load correctly when scrolling to the Projects section.
+- Checked image requests using the browser Developer Tools Network tab.
 
 ## Future Improvements
 

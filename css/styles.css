@@ -597,45 +597,6 @@ body.dark {
   text-decoration: none;
 }
 
-/* GitHub project sorting */
-.github-sort-control {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin: 1.5rem 0 2rem;
-}
-
-.github-sort-control label {
-  color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.github-sort {
-  min-width: 170px;
-  padding: 0.55rem 2rem 0.55rem 0.8rem;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--text);
-  font: inherit;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-
-.github-sort:focus {
-  outline: 2px solid var(--text);
-  outline-offset: 3px;
-}
-
-@media (max-width: 600px) {
-  .github-sort-control {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-}
-
 /* GitHub project sorting buttons */
 .github-sort-control {
   display: flex;
