@@ -1,30 +1,98 @@
-
+```md
 # Technical Documentation — Assignment 3
+
+## Project Overview
+
+This project is a responsive and interactive personal portfolio website built with HTML5, CSS3, and JavaScript.
+
+The website presents personal information, skills, projects, and a contact form. It also connects to the GitHub REST API to retrieve and display public repositories dynamically.
+
+Assignment 3 extends the previous portfolio by adding:
+
+- External API integration.
+- Dynamic GitHub project cards.
+- Project sorting.
+- Persistent filter and sorting preferences.
+- API loading and error handling.
+- Performance improvements.
 
 ## Technologies
 
-- **HTML5:** Semantic sections, navigation, headings, form labels, and accessible button attributes.
-- **CSS3:** Custom properties, CSS Grid, Flexbox, media queries, responsive typography, and hover/focus states.
-- **JavaScript:** Event listeners, DOM manipulation, project filtering, time-based text, form validation, form feedback, `localStorage`, asynchronous functions, and API integration.
-- **GitHub REST API:** Used to retrieve and display public repositories from the GitHub account `ZainabAlzayer10`.
+### HTML5
+
+HTML5 is used to create the structure of the website using semantic elements such as:
+
+- `header`
+- `nav`
+- `main`
+- `section`
+- `article`
+- `form`
+- `footer`
+
+Labels are connected to form fields using the `for` and `id` attributes. Buttons also include accessible attributes such as `aria-label` and `aria-expanded`.
+
+### CSS3
+
+CSS3 is used for:
+
+- Custom properties.
+- CSS Grid.
+- Flexbox.
+- Responsive layouts.
+- Media queries.
+- Responsive typography.
+- Hover and focus states.
+- Transitions and animations.
+- Light and dark mode styling.
+
+### JavaScript
+
+JavaScript is used for:
+
+- Event listeners.
+- DOM manipulation.
+- Mobile menu interaction.
+- Project filtering.
+- GitHub API integration.
+- Project sorting.
+- Contact form validation.
+- Time-based greeting.
+- Theme management.
+- Persistent user preferences.
+- Loading and error messages.
+
+### GitHub REST API
+
+The GitHub REST API is used to retrieve and display public repositories from the GitHub account:
+
+```text
+ZainabAlzayer10
+```
 
 ## Main Features
 
-1. Sticky navigation with links to About, Projects, and Contact.
-2. Responsive mobile menu shown below 700px.
-3. Light/dark mode saved in the browser using `localStorage`.
-4. Greeting changes according to the visitor's local time.
-5. Project cards can be filtered by Adventure or Platform.
-6. Contact form validates empty fields and email format.
-7. Success and error messages provide feedback after form submission.
-8. Public GitHub repositories are loaded dynamically using the GitHub API.
-9. Loading and error messages are displayed during the API request.
-10. Smooth scrolling, hover effects, and animated feedback messages improve the user experience.
-11. GitHub projects can be sorted by update date, number of stars, or project name.
+1. Sticky navigation with links to the About, Projects, and Contact sections.
+2. Responsive mobile menu for smaller screens.
+3. Light and dark mode.
+4. Theme preference saved using `localStorage`.
+5. Greeting based on the visitor's local time.
+6. Project filtering by category.
+7. Filter preference saved using `localStorage`.
+8. Contact form validation.
+9. Success and error messages for form submission.
+10. Dynamic GitHub project loading.
+11. GitHub API loading and error handling.
+12. GitHub project sorting.
+13. Sorting preference saved using `localStorage`.
+14. Lazy loading for project images.
+15. Asynchronous image decoding.
+16. Responsive layout for desktop and mobile devices.
+17. Hover effects, smooth scrolling, and animated feedback messages.
 
 ## GitHub API Integration
 
-The portfolio uses the GitHub REST API to retrieve the public repositories of the GitHub user `ZainabAlzayer10`.
+The portfolio uses the GitHub REST API to retrieve public repositories from the GitHub account `ZainabAlzayer10`.
 
 The API endpoint used is:
 
@@ -32,27 +100,58 @@ The API endpoint used is:
 https://api.github.com/users/ZainabAlzayer10/repos?sort=updated&per_page=6
 ```
 
-The request retrieves the most recently updated public repositories and displays up to six repositories on the portfolio website.
+The endpoint requests up to six public repositories and sorts them by their latest update.
+
+The website uses the JavaScript `fetch()` function to send an asynchronous request:
+
+```javascript
+const response = await fetch(
+  `https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=6`
+);
+```
+
+The returned response is converted to JSON:
+
+```javascript
+githubRepositories = await response.json();
+```
+
+The JSON data is then used to create project cards dynamically.
 
 For each repository, the website displays:
 
-- Repository name
-- Repository description
-- Main programming language
-- Number of stars
-- Direct link to the repository on GitHub
+- Repository name.
+- Repository description.
+- Main programming language.
+- Number of stars.
+- Direct link to the repository.
 
-The JavaScript `fetch()` function sends an asynchronous request to the API. The returned JSON data is then used to create project cards dynamically in the page.
+The repository link opens in a new browser tab using:
+
+```html
+target="_blank"
+rel="noopener noreferrer"
+```
 
 ## API Loading and Error Handling
 
-While the API request is being processed, the website displays:
+A loading message is displayed while the API request is being processed:
 
 ```text
 Loading GitHub projects...
 ```
 
-If the request fails, the website hides the loading message and displays:
+After the data is successfully retrieved, the loading message is hidden.
+
+The request checks whether the response was successful:
+
+```javascript
+if (!response.ok) {
+  throw new Error('GitHub API request failed');
+}
+```
+
+If the request fails, the `catch` block displays an error message:
 
 ```text
 Unable to load GitHub projects at the moment.
@@ -64,70 +163,444 @@ If the GitHub account does not contain any public repositories, the website disp
 No public GitHub projects were found.
 ```
 
-This ensures that the user receives clear feedback instead of seeing an empty section.
+This prevents the page from showing an empty section without feedback.
+
+## Dynamic GitHub Project Cards
+
+The `displayGitHubProjects()` function creates project cards using the repository data received from GitHub.
+
+The function first clears the existing project cards:
+
+```javascript
+githubProjectGrid.innerHTML = '';
+```
+
+It then loops through the repositories:
+
+```javascript
+repositories.forEach((repository, index) => {
+```
+
+For every repository, JavaScript creates an `article` element and adds the repository information to it.
+
+The project card includes:
+
+- A project number.
+- The repository name.
+- The repository description.
+- The programming language.
+- The number of stars.
+- A link to GitHub.
+
+Finally, the card is added to the GitHub projects container:
+
+```javascript
+githubProjectGrid.appendChild(projectCard);
+```
 
 ## Project Filtering
 
-Each project card has a `data-category` attribute:
+The original project cards contain a `data-category` attribute:
 
-- The Farm Adventure Game uses `data-category="adventure"`.
-- The 2D Platform Game uses `data-category="platform"`.
+```html
+<article class="project-card" data-category="adventure">
+```
 
-When the user selects a filter button, JavaScript compares the selected filter with each card's category and adds or removes the `hidden` CSS class.
+```html
+<article class="project-card" data-category="platform">
+```
 
-The GitHub projects are displayed in a separate project area and are loaded dynamically from the API.
+The available filter buttons are:
+
+- All.
+- Adventure.
+- Platform.
+
+When a filter button is clicked, JavaScript reads its `data-filter` value and compares it with the category of every project card.
+
+If the category does not match, JavaScript adds the `hidden` class:
+
+```javascript
+card.classList.toggle('hidden', !shouldShow);
+```
+
+The `hidden` class hides the project using CSS:
+
+```css
+.project-card.hidden {
+  display: none;
+}
+```
+
+## Persistent Project Filtering
+
+The selected project filter is saved using `localStorage`:
+
+```javascript
+localStorage.setItem(
+  'project-filter',
+  selectedFilter
+);
+```
+
+When the website loads, JavaScript retrieves the saved filter:
+
+```javascript
+const savedFilter =
+  localStorage.getItem('project-filter') || 'all';
+```
+
+The saved filter is then applied automatically:
+
+```javascript
+applyProjectFilter(savedFilter);
+```
+
+This allows the website to remember the visitor's previous filter selection.
+
+## GitHub Project Sorting
+
+GitHub projects can be sorted using three buttons:
+
+- Recently updated.
+- Most stars.
+- Name.
+
+Each button has a `data-sort` attribute:
+
+```html
+<button data-sort="updated">
+  Recently updated
+</button>
+```
+
+```html
+<button data-sort="stars">
+  Most stars
+</button>
+```
+
+```html
+<button data-sort="name">
+  Name
+</button>
+```
+
+When a sorting button is clicked, JavaScript copies the repository array:
+
+```javascript
+const sortedRepositories = [
+  ...githubRepositories
+];
+```
+
+A copy is used so that the original API data remains unchanged.
+
+### Sorting by Stars
+
+The repositories are sorted from the highest number of stars to the lowest:
+
+```javascript
+sortedRepositories.sort(
+  (firstRepository, secondRepository) =>
+    secondRepository.stargazers_count -
+    firstRepository.stargazers_count
+);
+```
+
+### Sorting by Name
+
+The repositories are sorted alphabetically:
+
+```javascript
+sortedRepositories.sort(
+  (firstRepository, secondRepository) =>
+    firstRepository.name.localeCompare(
+      secondRepository.name
+    )
+);
+```
+
+### Sorting by Update Date
+
+The repositories are sorted from the most recently updated to the oldest:
+
+```javascript
+sortedRepositories.sort(
+  (firstRepository, secondRepository) =>
+    new Date(secondRepository.updated_at) -
+    new Date(firstRepository.updated_at)
+);
+```
+
+After sorting, the project cards are displayed again using:
+
+```javascript
+displayGitHubProjects(sortedRepositories);
+```
+
+## Persistent GitHub Sorting
+
+The selected GitHub sorting option is saved using:
+
+```javascript
+localStorage.setItem(
+  'github-sort',
+  selectedSort
+);
+```
+
+When the website loads, the saved option is retrieved:
+
+```javascript
+const savedSort =
+  localStorage.getItem('github-sort') || 'updated';
+```
+
+The saved sorting option is then applied after the repositories are loaded:
+
+```javascript
+applyGitHubSort(savedSort);
+```
+
+This allows the website to remember the user's preferred sorting method.
+
+## Active Buttons
+
+The active filter and sorting buttons receive the `active` CSS class.
+
+For example:
+
+```javascript
+sortButton.classList.toggle(
+  'active',
+  sortButton.dataset.sort === selectedSort
+);
+```
+
+The active button has a filled background, while the other buttons remain transparent.
+
+This gives the user clear visual feedback about the current selection.
 
 ## Dark Mode and State Management
 
-The theme toggle changes the page between light mode and dark mode.
+The theme toggle changes the website between light mode and dark mode.
 
-The selected theme is stored using:
+When the user changes the theme, the selected value is stored:
 
 ```javascript
-localStorage.setItem('portfolio-theme', 'dark');
+localStorage.setItem(
+  'portfolio-theme',
+  isDark ? 'dark' : 'light'
+);
 ```
 
-When the page is opened again, JavaScript checks the saved value and restores the user's previous theme preference.
+When the website is opened, JavaScript checks the saved theme:
+
+```javascript
+const savedTheme =
+  localStorage.getItem('portfolio-theme');
+```
+
+If the saved value is `dark`, the `dark` class is added to the body:
+
+```javascript
+document.body.classList.add('dark');
+```
+
+The website therefore manages and remembers three main user preferences:
+
+- Theme preference.
+- Project filter preference.
+- GitHub sorting preference.
+
+## Time-Based Greeting
+
+The website uses the visitor's local time:
+
+```javascript
+const hour = new Date().getHours();
+```
+
+The greeting changes according to the current hour:
+
+```javascript
+if (hour < 12) {
+  greeting.textContent = 'Good morning, I am';
+} else if (hour < 18) {
+  greeting.textContent = 'Good afternoon, I am';
+} else {
+  greeting.textContent = 'Good evening, I am';
+}
+```
+
+This provides a small personalized interaction for visitors.
 
 ## Contact Form Validation
 
-The form submission is handled in JavaScript.
+The contact form submission is handled using JavaScript:
 
-The script checks that:
+```javascript
+contactForm.addEventListener(
+  'submit',
+  (event) => {
+    event.preventDefault();
+  }
+);
+```
 
-- The name field is not empty.
-- The email field is not empty.
-- The message field is not empty.
-- The email contains `@` and a dot.
+The `preventDefault()` method prevents the page from reloading.
 
-The page displays a clear error message when validation fails and a success message when the input is valid.
+The script retrieves and cleans the form values:
 
-The form is a front-end demo and does not send data to a backend server.
+```javascript
+const name =
+  document.querySelector('#name').value.trim();
+
+const email =
+  document.querySelector('#email').value.trim();
+
+const message =
+  document.querySelector('#message').value.trim();
+```
+
+The form checks whether any field is empty:
+
+```javascript
+if (!name || !email || !message) {
+  formMessage.textContent =
+    'Please complete all fields before sending your message.';
+}
+```
+
+It also checks whether the email contains `@` and a dot:
+
+```javascript
+if (!email.includes('@') || !email.includes('.')) {
+  formMessage.textContent =
+    'Please enter a valid email address.';
+}
+```
+
+If the information is valid, a success message is displayed.
+
+The form is a front-end demonstration and does not send data to a backend server.
+
+## Performance Improvements
+
+Several performance improvements were applied.
+
+### Lazy Loading
+
+Project images use:
+
+```html
+loading="lazy"
+```
+
+This delays image loading until the images are close to the visible area.
+
+### Asynchronous Image Decoding
+
+Project images also use:
+
+```html
+decoding="async"
+```
+
+This allows the browser to decode images without unnecessarily blocking page rendering.
+
+### Deferred JavaScript
+
+The JavaScript file is loaded with:
+
+```html
+<script src="js/script.js" defer></script>
+```
+
+The `defer` attribute allows the HTML document to be parsed before the script is executed.
+
+### CSS Cleanup
+
+Unused styles related to the previous sorting `select` element were removed.
+
+Duplicate styles for `.github-sort-control` were also removed after replacing the dropdown with sorting buttons.
+
+## Accessibility Considerations
+
+The website includes several accessibility improvements:
+
+- Semantic HTML elements.
+- Labels connected to form fields.
+- Alternative text for project images.
+- Accessible navigation labels.
+- `aria-expanded` for the mobile menu.
+- `aria-label` for interactive buttons.
+- `role="status"` for form feedback.
+- Visible focus styles for form controls.
 
 ## Testing Checklist
 
-- Tested the page by opening `index.html` in a modern browser.
-- Resized the browser to desktop and mobile widths.
-- Checked navigation links, menu button, theme toggle, greeting, project filters, and form feedback.
-- Tested the form with empty fields, an invalid email, and valid information.
-- Tested hover effects and message animations.
-- Confirmed that the form does not reload the page or attempt to send data.
-- Confirmed that GitHub repositories are loaded and displayed correctly.
-- Confirmed that the loading message appears before the API data is displayed.
-- Tested the API error message by checking the behavior when the request fails.
-- Confirmed that each GitHub project link opens the correct repository in a new tab.
-- Tested project images using lazy loading and asynchronous decoding.
-- Confirmed that project images load correctly when scrolling to the Projects section.
-- Checked image requests using the browser Developer Tools Network tab.
+The following features were tested:
+
+- Opening `index.html` in a modern browser.
+- Navigation links.
+- Responsive mobile menu.
+- Light and dark mode.
+- Theme persistence after reopening the website.
+- Time-based greeting.
+- Project filtering.
+- Filter persistence after reopening the website.
+- Contact form with empty fields.
+- Contact form with an invalid email.
+- Contact form with valid information.
+- Success and error messages.
+- GitHub repository loading.
+- GitHub API error handling.
+- Empty GitHub repository handling.
+- GitHub project links.
+- GitHub project sorting by update date.
+- GitHub project sorting by stars.
+- GitHub project sorting by name.
+- Sorting preference persistence.
+- Project image lazy loading.
+- Asynchronous image decoding.
+- Desktop layout.
+- Mobile layout.
+- Hover effects and transitions.
+
+The browser Developer Tools Network tab was used to inspect image requests and confirm that project images load correctly when reaching the Projects section.
+
+## File Structure
+
+```text
+assignment-3/
+├── assets/
+│   ├── farm-adventure.png
+│   └── platform-game.png
+├── index.html
+├── css/
+│   └── styles.css
+├── js/
+│   └── script.js
+├── docs/
+│   ├── ai-usage-report.md
+│   └── technical-documentation.md
+├── README.md
+└── .gitignore
+```
 
 ## Future Improvements
 
 Future versions could include:
 
-- More detailed project information from GitHub.
+- More detailed GitHub repository information.
 - Repository language filtering.
 - Pagination for displaying more repositories.
 - A profile image.
-- Form submission through a backend service.
-- A deployment URL.
+- A backend service for the contact form.
+- A live deployment URL.
 - A GitHub access token to support higher API request limits.
+- A blog section for technical articles.
+- More advanced accessibility testing.
+- Automated performance testing using Lighthouse.
