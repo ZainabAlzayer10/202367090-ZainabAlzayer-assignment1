@@ -18,6 +18,25 @@ No installation or backend is required. The contact form is a front-end demo and
 - Validate the contact form and show success or error feedback.
 - Use hover effects, smooth scrolling, and animated messages.
 
+## External API Integration
+
+The portfolio uses the GitHub REST API to retrieve and display public repositories from the GitHub account `ZainabAlzayer10`.
+
+The website displays:
+
+- Repository name
+- Repository description
+- Main programming language
+- Number of stars
+- Direct link to the repository
+
+The JavaScript `fetch()` function sends a request to the GitHub API and creates project cards dynamically. A loading message is displayed while the data is being retrieved, and an error message is shown if the request fails.
+
+GitHub API endpoint:
+
+```text
+https://api.github.com/users/ZainabAlzayer10/repos
+
 ## Folder structure
 
 ```text

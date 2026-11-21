@@ -556,3 +556,43 @@ body.dark {
     margin: 0.25rem 0;
   }
 }
+
+/* GitHub API projects */
+.github-projects {
+  margin-top: 4rem;
+}
+
+.github-heading {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.github-message {
+  margin-bottom: 1.5rem;
+  color: var(--muted);
+}
+
+.github-message.error {
+  color: #b42318;
+}
+
+.github-project-card {
+  min-height: 190px;
+}
+
+.github-project-number {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.github-project-card h3 {
+  overflow-wrap: anywhere;
+}
+
+.github-project-card a {
+  color: inherit;
+  text-decoration: none;
+}

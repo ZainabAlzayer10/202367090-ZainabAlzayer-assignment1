@@ -73,7 +73,8 @@
           </h1>
 
           <p class="hero-text">
-            I turn ideas into interactive experiences through code, design, and creativity.
+            I turn ideas into interactive experiences through code, design,
+            and creativity.
           </p>
 
           <div class="hero-actions">
@@ -157,17 +158,32 @@
           </div>
 
           <div class="project-filters" aria-label="Filter projects">
-            <button class="filter-button active" type="button" data-filter="all">
+            <button
+              class="filter-button active"
+              type="button"
+              data-filter="all"
+            >
               All
             </button>
-            <button class="filter-button" type="button" data-filter="adventure">
+
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="adventure"
+            >
               Adventure
             </button>
-            <button class="filter-button" type="button" data-filter="platform">
+
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="platform"
+            >
               Platform
             </button>
           </div>
 
+          <!-- Existing projects -->
           <div class="project-grid">
             <!-- Farm game project -->
             <article class="project-card" data-category="adventure">
@@ -189,7 +205,6 @@
                     using Godot. The game includes pixel-art environments,
                     platforms, characters, and interactive elements.
                   </p>
-
                 </div>
 
                 <span class="project-arrow" aria-hidden="true">↗</span>
@@ -216,12 +231,33 @@
                     Godot. The game includes a pixel-art character, platforms,
                     and obstacles.
                   </p>
-
                 </div>
 
                 <span class="project-arrow" aria-hidden="true">↗</span>
               </div>
             </article>
+          </div>
+
+          <!-- GitHub projects loaded from GitHub API -->
+          <div class="github-projects">
+            <h3 class="github-heading">More projects from GitHub</h3>
+
+            <p id="github-loading" class="github-message">
+              Loading GitHub projects...
+            </p>
+
+            <p
+              id="github-error"
+              class="github-message error"
+              hidden
+            >
+              Unable to load GitHub projects at the moment.
+            </p>
+
+            <div
+              id="github-project-grid"
+              class="project-grid"
+            ></div>
           </div>
         </div>
       </section>
@@ -245,6 +281,7 @@
 
         <form id="contact-form" class="contact-form">
           <label for="name">Name</label>
+
           <input
             id="name"
             name="name"
@@ -254,6 +291,7 @@
           >
 
           <label for="email">Email</label>
+
           <input
             id="email"
             name="email"
@@ -263,6 +301,7 @@
           >
 
           <label for="message">Message</label>
+
           <textarea
             id="message"
             name="message"
@@ -275,7 +314,11 @@
             Send message ↗
           </button>
 
-          <p id="form-message" class="form-message" role="status"></p>
+          <p
+            id="form-message"
+            class="form-message"
+            role="status"
+          ></p>
         </form>
       </section>
     </main>

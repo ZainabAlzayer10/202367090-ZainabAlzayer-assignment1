@@ -120,3 +120,80 @@ contactForm.addEventListener('submit', (event) => {
 
   contactForm.reset();
 });
+
+// Load public GitHub repositories
+const githubProjectGrid = document.querySelector('#github-project-grid');
+const githubLoading = document.querySelector('#github-loading');
+const githubError = document.querySelector('#github-error');
+
+const githubUsername = 'ZainabAlzayer10';
+
+async function loadGitHubProjects() {
+  try {
+    const response = await fetch(
+      `https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=6`
+    );
+
+    if (!response.ok) {
+      throw new Error('GitHub API request failed');
+    }
+
+    const repositories = await response.json();
+
+    githubLoading.hidden = true;
+
+    if (repositories.length === 0) {
+      githubError.textContent = 'No public GitHub projects were found.';
+      githubError.hidden = false;
+      return;
+    }
+
+    repositories.forEach((repository, index) => {
+      const projectCard = document.createElement('article');
+      projectCard.className = 'project-card github-project-card';
+
+      projectCard.innerHTML = `
+        <div class="project-info">
+          <div>
+            <span class="github-project-number">
+              ${String(index + 1).padStart(2, '0')}
+            </span>
+
+            <h3>${repository.name}</h3>
+
+            <p>
+              ${repository.description || 'No description available.'}
+            </p>
+
+            <div class="project-tags">
+              <span class="project-tag">
+                ${repository.language || 'Code'}
+              </span>
+
+              <span class="project-tag">
+                ★ ${repository.stargazers_count}
+              </span>
+            </div>
+          </div>
+
+          <a
+            class="project-arrow"
+            href="${repository.html_url}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View ${repository.name} on GitHub"
+          >
+            ↗
+          </a>
+        </div>
+      `;
+
+      githubProjectGrid.appendChild(projectCard);
+    });
+  } catch (error) {
+    githubLoading.hidden = true;
+    githubError.hidden = false;
+  }
+}
+
+loadGitHubProjects();
