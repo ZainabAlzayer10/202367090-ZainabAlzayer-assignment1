@@ -1,8 +1,8 @@
-# Assignment 3 — Advanced Interactive Personal Portfolio
+# Assignment 4 — Personal Web Application
 
-A responsive and interactive personal portfolio website built with HTML, CSS, and JavaScript.
+A responsive and interactive personal portfolio web application built with HTML, CSS, and JavaScript.
 
-This project builds on the previous portfolio by adding external API integration, advanced project sorting, persistent user preferences, error handling, and performance improvements.
+This project brings together the skills developed throughout the previous assignments into one complete and polished personal portfolio website. It includes interactive features, external API integration, persistent user preferences, responsive design, form validation, error handling, and performance improvements.
 
 ## Project Features
 
@@ -16,7 +16,7 @@ This project builds on the previous portfolio by adding external API integration
 - Dynamic display of public GitHub repositories.
 - Sorting GitHub projects by update date, stars, or name.
 - Contact form validation.
-- Loading and error messages.
+- Loading, success, and error messages.
 - Persistent user preferences using `localStorage`.
 - Lazy loading and asynchronous decoding for project images.
 - Hover effects, smooth scrolling, and animated feedback messages.
@@ -90,8 +90,6 @@ The website displays:
 - Main programming language.
 - Number of stars.
 - Direct link to the repository.
-
-The JavaScript `fetch()` function sends an asynchronous request to the GitHub API and creates project cards dynamically.
 
 ### GitHub API Endpoint
 
@@ -174,19 +172,22 @@ This prevents images below the visible area from loading before they are needed.
 ## Folder Structure
 
 ```text
-assignment-3/
-├── assets/
-│   ├── farm-adventure.png
-│   └── platform-game.png
+202367090-ZainabAlzayer-assignment4/
+├── README.md
 ├── index.html
 ├── css/
 │   └── styles.css
 ├── js/
 │   └── script.js
+├── assets/
+│   ├── farm-adventure.png
+│   └── platform-game.png
 ├── docs/
 │   ├── ai-usage-report.md
 │   └── technical-documentation.md
-├── README.md
+├── presentation/
+│   ├── slides.pdf
+│   └── demo-video.mp4
 └── .gitignore
 ```
 
@@ -220,6 +221,8 @@ ChatGPT was used for:
 - Implementing project sorting and state management.
 - Reviewing and improving the documentation.
 - Suggesting performance improvements.
+- Reviewing the final Assignment 4 requirements.
+- Helping prepare the presentation structure.
 
 All AI-generated suggestions were reviewed, modified, understood, and tested before being used.
 
@@ -231,22 +234,6 @@ docs/ai-usage-report.md
 
 ## Deployment
 
-The website can be deployed using GitHub Pages by enabling Pages for the repository's main branch.
+The website is deployed using GitHub Pages.
 
-An optional live deployment link can be added here:
-
-```text
-Live website: Add your GitHub Pages URL here
-```
-
-## Future Improvements
-
-Future versions could include:
-
-- A real backend for the contact form.
-- More detailed GitHub repository information.
-- Repository language filtering.
-- Pagination for GitHub repositories.
-- A profile image.
-- A blog section.
-- A live deployment link.
+Live website:
