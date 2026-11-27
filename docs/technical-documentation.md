@@ -1,20 +1,26 @@
-```md
 # Technical Documentation — Assignment 4
 
 ## Project Overview
 
-This project is a responsive and interactive personal portfolio website built with HTML5, CSS3, and JavaScript.
+This project is a responsive and interactive personal portfolio web application built with HTML5, CSS3, and JavaScript.
 
 The website presents personal information, skills, projects, and a contact form. It also connects to the GitHub REST API to retrieve and display public repositories dynamically.
 
-Assignment 4 extends the previous portfolio by adding:
+Assignment 4 brings together the skills and features developed throughout the previous assignments into one complete and polished personal web application.
 
-- External API integration.
+The final application includes:
+
+- Responsive personal portfolio design.
+- External GitHub API integration.
 - Dynamic GitHub project cards.
-- Project sorting.
-- Persistent filter and sorting preferences.
-- API loading and error handling.
+- Project sorting and filtering.
+- Persistent user preferences.
+- API loading, empty-data, and error handling.
+- Contact form validation.
+- Light and dark mode.
 - Performance improvements.
+- Accessibility considerations.
+- Responsive layouts for desktop and mobile devices.
 
 ## Technologies
 
@@ -92,7 +98,7 @@ ZainabAlzayer10
 
 ## GitHub API Integration
 
-The portfolio uses the GitHub REST API to retrieve public repositories from the GitHub account `ZainabAlzayer10`.
+The portfolio uses the GitHub REST API to retrieve and display public repositories from the GitHub account `ZainabAlzayer10`.
 
 The API endpoint used is:
 
@@ -151,7 +157,7 @@ if (!response.ok) {
 }
 ```
 
-If the request fails, the `catch` block displays an error message:
+If the request fails, the `catch` block displays:
 
 ```text
 Unable to load GitHub projects at the moment.
@@ -183,7 +189,7 @@ repositories.forEach((repository, index) => {
 
 For every repository, JavaScript creates an `article` element and adds the repository information to it.
 
-The project card includes:
+Each project card includes:
 
 - A project number.
 - The repository name.
@@ -333,7 +339,7 @@ sortedRepositories.sort(
 );
 ```
 
-After sorting, the project cards are displayed again using:
+After sorting, the project cards are displayed again:
 
 ```javascript
 displayGitHubProjects(sortedRepositories);
@@ -408,7 +414,7 @@ If the saved value is `dark`, the `dark` class is added to the body:
 document.body.classList.add('dark');
 ```
 
-The website therefore manages and remembers three main user preferences:
+The website manages and remembers three main user preferences:
 
 - Theme preference.
 - Project filter preference.
@@ -441,12 +447,9 @@ This provides a small personalized interaction for visitors.
 The contact form submission is handled using JavaScript:
 
 ```javascript
-contactForm.addEventListener(
-  'submit',
-  (event) => {
-    event.preventDefault();
-  }
-);
+contactForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+});
 ```
 
 The `preventDefault()` method prevents the page from reloading.
@@ -454,14 +457,9 @@ The `preventDefault()` method prevents the page from reloading.
 The script retrieves and cleans the form values:
 
 ```javascript
-const name =
-  document.querySelector('#name').value.trim();
-
-const email =
-  document.querySelector('#email').value.trim();
-
-const message =
-  document.querySelector('#message').value.trim();
+const name = document.querySelector('#name').value.trim();
+const email = document.querySelector('#email').value.trim();
+const message = document.querySelector('#message').value.trim();
 ```
 
 The form checks whether any field is empty:
@@ -524,7 +522,7 @@ The `defer` attribute allows the HTML document to be parsed before the script is
 
 Unused styles related to the previous sorting `select` element were removed.
 
-Duplicate styles for `.github-sort-control` were also removed after replacing the dropdown with sorting buttons.
+Duplicate CSS rules were also removed after replacing the dropdown with sorting buttons.
 
 ## Accessibility Considerations
 
@@ -571,22 +569,31 @@ The following features were tested:
 
 The browser Developer Tools Network tab was used to inspect image requests and confirm that project images load correctly when reaching the Projects section.
 
+The JavaScript file was also checked using:
+
+```text
+node --check js/script.js
+```
+
 ## File Structure
 
 ```text
-assignment-3/
-├── assets/
-│   ├── farm-adventure.png
-│   └── platform-game.png
+202367090-ZainabAlzayer-assignment4/
+├── README.md
 ├── index.html
 ├── css/
 │   └── styles.css
 ├── js/
 │   └── script.js
+├── assets/
+│   ├── farm-adventure.png
+│   └── platform-game.png
 ├── docs/
 │   ├── ai-usage-report.md
 │   └── technical-documentation.md
-├── README.md
+├── presentation/
+│   ├── slides.pdf
+│   └── demo-video.mp4
 └── .gitignore
 ```
 
