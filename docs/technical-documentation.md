@@ -1,5 +1,5 @@
 ```md
-# Technical Documentation — Assignment 3
+# Technical Documentation — Assignment 4
 
 ## Project Overview
 
@@ -7,7 +7,7 @@ This project is a responsive and interactive personal portfolio website built wi
 
 The website presents personal information, skills, projects, and a contact form. It also connects to the GitHub REST API to retrieve and display public repositories dynamically.
 
-Assignment 3 extends the previous portfolio by adding:
+Assignment 4 extends the previous portfolio by adding:
 
 - External API integration.
 - Dynamic GitHub project cards.
