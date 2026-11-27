@@ -611,3 +611,10 @@ Future versions could include:
 - A blog section for technical articles.
 - More advanced accessibility testing.
 - Automated performance testing using Lighthouse.
+
+## Deployment
+
+The website is deployed using GitHub Pages.
+
+Live website:
+https://zainabalzayer10.github.io/202367090-ZainabAlzayer-assignment1/
