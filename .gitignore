@@ -1,0 +1,36 @@
+# Operating system files
+.DS_Store
+.DS_Store?
+._*
+
+# Editor files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node.js files
+node_modules/
+
+# Environment files
+.env
+.env.*
+
+# Build and coverage files
+dist/
+build/
+coverage/
+
+# Local development files
+*.local
+
+# AI evidence files
+ai-evidence/
+conversations/
+artifacts/
+*.zip
