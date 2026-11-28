@@ -122,7 +122,7 @@ function showPokemonMessage(message) {
   pokemonMessageTimeout = setTimeout(() => {
     pokemonMessage.textContent = '';
     siteHeader.classList.remove('has-pokemon-message');
-  }, 5000);
+  }, 3000);
 }
 
 function movePokemonRandomly() {
