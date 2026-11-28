@@ -13,6 +13,7 @@ const pokemonImage = document.querySelector('#pokemon-image');
 const pokemonScore = document.querySelector('#pokemon-score');
 const pokemonReset = document.querySelector('#pokemon-reset');
 const pokemonMessage = document.querySelector('#pokemon-message');
+const siteHeader = document.querySelector('.site-header');
 
 const filterButtons = document.querySelectorAll('.filter-button');
 const projectCards = document.querySelectorAll(
@@ -116,9 +117,11 @@ function updatePokemonScore() {
 function showPokemonMessage(message) {
   clearTimeout(pokemonMessageTimeout);
   pokemonMessage.textContent = message;
+  siteHeader.classList.add('has-pokemon-message');
 
   pokemonMessageTimeout = setTimeout(() => {
     pokemonMessage.textContent = '';
+    siteHeader.classList.remove('has-pokemon-message');
   }, 5000);
 }
 
