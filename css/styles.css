@@ -227,6 +227,9 @@ h2 {
   color: var(--text);
   box-shadow: 0 8px 20px rgb(24 33 31 / 12%);
   font-size: 0.82rem;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
   pointer-events: none;
   opacity: 0;
   transform: translateX(-50%);
