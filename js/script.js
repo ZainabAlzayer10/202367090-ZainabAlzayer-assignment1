@@ -302,7 +302,6 @@ async function loadGitHubProjects() {
     }
 
     applyGitHubSort(savedSort);
-    requestAnimationFrame(movePokemonRandomly);
   } catch (error) {
     githubLoading.hidden = true;
     githubError.hidden = false;
