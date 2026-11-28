@@ -1,26 +1,22 @@
+```md
 # Technical Documentation — Assignment 4
 
 ## Project Overview
 
-This project is a responsive and interactive personal portfolio web application built with HTML5, CSS3, and JavaScript.
+This project is a responsive and interactive personal portfolio website built with HTML5, CSS3, and JavaScript.
 
 The website presents personal information, skills, projects, and a contact form. It also connects to the GitHub REST API to retrieve and display public repositories dynamically.
 
-Assignment 4 brings together the skills and features developed throughout the previous assignments into one complete and polished personal web application.
+Assignment 4 extends the previous portfolio by adding:
 
-The final application includes:
-
-- Responsive personal portfolio design.
-- External GitHub API integration.
+- External API integration.
 - Dynamic GitHub project cards.
-- Project sorting and filtering.
-- Persistent user preferences.
-- API loading, empty-data, and error handling.
-- Contact form validation.
-- Light and dark mode.
+- Project sorting.
+- Persistent filter and sorting preferences.
+- API loading and error handling.
 - Performance improvements.
-- Accessibility considerations.
-- Responsive layouts for desktop and mobile devices.
+- An original hidden Pokémon hunt using the PokéAPI.
+- Responsive feedback messages for desktop and mobile devices.
 
 ## Technologies
 
@@ -95,10 +91,13 @@ ZainabAlzayer10
 15. Asynchronous image decoding.
 16. Responsive layout for desktop and mobile devices.
 17. Hover effects, smooth scrolling, and animated feedback messages.
+18. Hidden Pokémon hunt with random Pokémon images.
+19. Pokémon caught counter and reset button.
+20. Pokémon feedback messages after opening, catching, and resetting.
 
 ## GitHub API Integration
 
-The portfolio uses the GitHub REST API to retrieve and display public repositories from the GitHub account `ZainabAlzayer10`.
+The portfolio uses the GitHub REST API to retrieve public repositories from the GitHub account `ZainabAlzayer10`.
 
 The API endpoint used is:
 
@@ -157,7 +156,7 @@ if (!response.ok) {
 }
 ```
 
-If the request fails, the `catch` block displays:
+If the request fails, the `catch` block displays an error message:
 
 ```text
 Unable to load GitHub projects at the moment.
@@ -189,7 +188,7 @@ repositories.forEach((repository, index) => {
 
 For every repository, JavaScript creates an `article` element and adds the repository information to it.
 
-Each project card includes:
+The project card includes:
 
 - A project number.
 - The repository name.
@@ -339,7 +338,7 @@ sortedRepositories.sort(
 );
 ```
 
-After sorting, the project cards are displayed again:
+After sorting, the project cards are displayed again using:
 
 ```javascript
 displayGitHubProjects(sortedRepositories);
@@ -414,7 +413,7 @@ If the saved value is `dark`, the `dark` class is added to the body:
 document.body.classList.add('dark');
 ```
 
-The website manages and remembers three main user preferences:
+The website therefore manages and remembers three main user preferences:
 
 - Theme preference.
 - Project filter preference.
@@ -447,9 +446,12 @@ This provides a small personalized interaction for visitors.
 The contact form submission is handled using JavaScript:
 
 ```javascript
-contactForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-});
+contactForm.addEventListener(
+  'submit',
+  (event) => {
+    event.preventDefault();
+  }
+);
 ```
 
 The `preventDefault()` method prevents the page from reloading.
@@ -457,9 +459,14 @@ The `preventDefault()` method prevents the page from reloading.
 The script retrieves and cleans the form values:
 
 ```javascript
-const name = document.querySelector('#name').value.trim();
-const email = document.querySelector('#email').value.trim();
-const message = document.querySelector('#message').value.trim();
+const name =
+  document.querySelector('#name').value.trim();
+
+const email =
+  document.querySelector('#email').value.trim();
+
+const message =
+  document.querySelector('#message').value.trim();
 ```
 
 The form checks whether any field is empty:
@@ -522,7 +529,7 @@ The `defer` attribute allows the HTML document to be parsed before the script is
 
 Unused styles related to the previous sorting `select` element were removed.
 
-Duplicate CSS rules were also removed after replacing the dropdown with sorting buttons.
+Duplicate styles for `.github-sort-control` were also removed after replacing the dropdown with sorting buttons.
 
 ## Accessibility Considerations
 
@@ -569,33 +576,69 @@ The following features were tested:
 
 The browser Developer Tools Network tab was used to inspect image requests and confirm that project images load correctly when reaching the Projects section.
 
-The JavaScript file was also checked using:
-
-```text
-node --check js/script.js
-```
-
 ## File Structure
 
 ```text
-202367090-ZainabAlzayer-assignment4/
-├── README.md
-├── index.html
-├── css/
-│   └── styles.css
-├── js/
-│   └── script.js
+Assignment-1-Foundation-AI-Integration/
 ├── assets/
 │   ├── farm-adventure.png
 │   └── platform-game.png
+├── css/
+│   └── styles.css
 ├── docs/
 │   ├── ai-usage-report.md
 │   └── technical-documentation.md
+├── js/
+│   └── script.js
 ├── presentation/
-│   ├── slides.pdf
-│   └── demo-video.mp4
-└── .gitignore
+│   ├── Assignment4_Personal_Web_Application_Final.pptx
+│   └── Assignment4_Website_Demonstration.mp4
+├── .gitignore
+├── index.html
+└── README.md
 ```
+
+## Pokémon Hunt
+
+The Pokémon hunt is an interactive feature added to make the portfolio more original and engaging.
+
+The game uses the PokéAPI to retrieve a random Pokémon from the first 151 Pokémon:
+
+```javascript
+const randomId = Math.floor(Math.random() * 151) + 1;
+const response = await fetch(
+  `https://pokeapi.co/api/v2/pokemon/${randomId}`
+);
+```
+
+After the response is converted to JSON, the Pokémon sprite is assigned to the game image. The target is positioned randomly within the document so that the visitor must search by scrolling.
+
+When the visitor clicks the Pokémon:
+
+1. The caught counter increases.
+2. The new score is saved using `localStorage`.
+3. A feedback message displays the Pokémon name.
+4. A new Pokémon is requested and placed in a new location.
+
+The reset button sets the counter to zero and displays the introductory message:
+
+```text
+A Pokémon escaped from its field! Help me catch it and enjoy the hunt.
+```
+
+The game supports desktop and touch screens. The Pokémon is not repositioned during scrolling on mobile devices. The message uses responsive CSS, wraps long text inside its container, and disappears after the configured timeout.
+
+## Pokémon State and Feedback
+
+The caught number is restored when the page opens:
+
+```javascript
+let pokemonCaught = Number(
+  localStorage.getItem('pokemon-caught') || 0
+);
+```
+
+The feedback message is controlled by `showPokemonMessage()`. The function clears an older timeout, displays the new text, and removes the message after the delay. On mobile devices, temporary header space is added only while the message is visible. When the message disappears, the extra space is removed so that the page content returns to its normal position.
 
 ## Future Improvements
 
@@ -611,10 +654,3 @@ Future versions could include:
 - A blog section for technical articles.
 - More advanced accessibility testing.
 - Automated performance testing using Lighthouse.
-
-## Deployment
-
-The website is deployed using GitHub Pages.
-
-Live website:
-https://zainabalzayer10.github.io/202367090-ZainabAlzayer-assignment1/

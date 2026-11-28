@@ -1,8 +1,8 @@
-# Assignment 4 — Personal Web Application
+# Assignment 4 — Interactive Personal Portfolio
 
-A responsive and interactive personal portfolio web application built with HTML, CSS, and JavaScript.
+A responsive and interactive personal portfolio website built with HTML, CSS, and JavaScript.
 
-This project brings together the skills developed throughout the previous assignments into one complete and polished personal portfolio website. It includes interactive features, external API integration, persistent user preferences, responsive design, form validation, error handling, and performance improvements.
+This project builds on the previous portfolio by adding external API integration, advanced project sorting, persistent user preferences, error handling, and performance improvements.
 
 ## Project Features
 
@@ -16,10 +16,14 @@ This project brings together the skills developed throughout the previous assign
 - Dynamic display of public GitHub repositories.
 - Sorting GitHub projects by update date, stars, or name.
 - Contact form validation.
-- Loading, success, and error messages.
+- Loading and error messages.
 - Persistent user preferences using `localStorage`.
 - Lazy loading and asynchronous decoding for project images.
 - Hover effects, smooth scrolling, and animated feedback messages.
+- Hidden Pokémon hunt using the PokéAPI.
+- Pokémon caught counter with a Poké Ball icon.
+- Reset button for the Pokémon counter.
+- Responsive Pokémon message layout for desktop and mobile screens.
 
 ## Run Locally
 
@@ -79,6 +83,20 @@ The form displays a success or error message based on the entered information.
 
 The form does not send real messages because it is a front-end demonstration.
 
+## Pokémon Hunt
+
+The website includes a small interactive Pokémon hunt as an original creative feature.
+
+When the page opens, a random Pokémon is retrieved from the PokéAPI and placed at a random position within the page. The visitor searches for it by scrolling and clicks it to catch it. After a successful catch, the counter increases, a feedback message displays the Pokémon name, and a new Pokémon is loaded in a new location.
+
+The caught counter is saved with `localStorage`. The reset button sets the counter back to zero and displays the introductory message again. The game supports desktop and touch devices. On mobile screens, the Pokémon keeps its position while the visitor scrolls, and the message wraps inside the screen.
+
+The Pokémon image is retrieved from:
+
+```text
+https://pokeapi.co/api/v2/pokemon/{id}
+```
+
 ## External API Integration
 
 The portfolio uses the GitHub REST API to retrieve public repositories from the GitHub account `ZainabAlzayer10`.
@@ -90,6 +108,8 @@ The website displays:
 - Main programming language.
 - Number of stars.
 - Direct link to the repository.
+
+The JavaScript `fetch()` function sends an asynchronous request to the GitHub API and creates project cards dynamically.
 
 ### GitHub API Endpoint
 
@@ -136,6 +156,7 @@ The website manages and stores several user preferences:
 - Selected light or dark theme.
 - Selected project filter.
 - Selected GitHub project sorting option.
+- Number of caught Pokémon.
 - Active filter and sorting buttons.
 
 These preferences are saved in the browser using `localStorage`.
@@ -147,6 +168,7 @@ The website includes the following performance improvements:
 - Project images use lazy loading.
 - Project images use asynchronous decoding.
 - JavaScript is loaded using the `defer` attribute.
+- The Pokémon counter is stored in `localStorage`.
 - Unused CSS styles were removed.
 - Duplicate CSS rules were removed.
 - The website uses efficient DOM updates when displaying GitHub projects.
@@ -172,23 +194,23 @@ This prevents images below the visible area from loading before they are needed.
 ## Folder Structure
 
 ```text
-202367090-ZainabAlzayer-assignment4/
-├── README.md
-├── index.html
-├── css/
-│   └── styles.css
-├── js/
-│   └── script.js
+Assignment-1-Foundation-AI-Integration/
 ├── assets/
 │   ├── farm-adventure.png
 │   └── platform-game.png
+├── css/
+│   └── styles.css
 ├── docs/
 │   ├── ai-usage-report.md
 │   └── technical-documentation.md
+├── js/
+│   └── script.js
 ├── presentation/
-│   ├── slides.pdf
-│   └── demo-video.mp4
-└── .gitignore
+│   ├── Assignment4_Personal_Web_Application_Final.pptx
+│   └── Assignment4_Website_Demonstration.mp4
+├── .gitignore
+├── index.html
+└── README.md
 ```
 
 ## Testing
@@ -209,6 +231,9 @@ The following features were tested:
 - Sorting preference persistence.
 - Project image loading.
 - Desktop and mobile layouts.
+- Pokémon hunt, counter, reset button, and PokéAPI loading.
+- Pokémon position while scrolling on mobile.
+- Pokémon message position, text wrapping, and automatic disappearance.
 
 ## AI Use
 
@@ -221,8 +246,10 @@ ChatGPT was used for:
 - Implementing project sorting and state management.
 - Reviewing and improving the documentation.
 - Suggesting performance improvements.
-- Reviewing the final Assignment 4 requirements.
-- Helping prepare the presentation structure.
+- Planning and debugging the Pokémon hunt feature.
+- Explaining the PokéAPI request and random Pokémon loading.
+- Fixing Pokémon movement during mobile scrolling.
+- Improving the responsive message layout and text wrapping.
 
 All AI-generated suggestions were reviewed, modified, understood, and tested before being used.
 
@@ -234,7 +261,22 @@ docs/ai-usage-report.md
 
 ## Deployment
 
-The website is deployed using GitHub Pages.
+The website can be deployed using GitHub Pages by enabling Pages for the repository's main branch.
 
-Live website:
-https://zainabalzayer10.github.io/202367090-ZainabAlzayer-assignment1/
+An optional live deployment link can be added here:
+
+```text
+Live website: https://zainabalzayer10.github.io/202367090-ZainabAlzayer-assignment1/
+```
+
+## Future Improvements
+
+Future versions could include:
+
+- A real backend for the contact form.
+- More detailed GitHub repository information.
+- Repository language filtering.
+- Pagination for GitHub repositories.
+- A profile image.
+- A blog section.
+- A live deployment link.
