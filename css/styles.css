@@ -188,6 +188,7 @@ h2 {
   background: var(--surface);
   box-shadow: 0 10px 26px rgb(24 33 31 / 18%);
   cursor: crosshair;
+  touch-action: manipulation;
   animation: pokemon-float 1.8s ease-in-out infinite;
 }
 
