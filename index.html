@@ -42,6 +42,21 @@
           ☰
         </button>
 
+        <div class="pokemon-score" aria-label="Pokémon caught counter">
+          <span class="pokeball-icon" aria-hidden="true">
+            <span class="pokeball-center"></span>
+          </span>
+          <span id="pokemon-score" aria-live="polite">0</span>
+          <button id="pokemon-reset" class="pokemon-reset" type="button" aria-label="Reset Pokémon caught counter" title="Reset counter">↻</button>
+
+          <p
+            id="pokemon-message"
+            class="pokemon-message"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </div>
+
         <div class="nav-links">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
@@ -56,20 +71,6 @@
             ◐
           </button>
 
-          <div class="pokemon-score" aria-label="Pokémon caught counter">
-            <span class="pokeball-icon" aria-hidden="true">
-              <span class="pokeball-center"></span>
-            </span>
-            <span id="pokemon-score" aria-live="polite">0</span>
-            <button id="pokemon-reset" class="pokemon-reset" type="button" aria-label="Reset Pokémon caught counter" title="Reset counter">↻</button>
-
-            <p
-              id="pokemon-message"
-              class="pokemon-message"
-              role="status"
-              aria-live="polite"
-            ></p>
-          </div>
         </div>
       </nav>
     </header>

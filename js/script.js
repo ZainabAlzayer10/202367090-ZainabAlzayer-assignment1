@@ -206,17 +206,6 @@ pokemonReset.addEventListener('click', () => {
 });
 
 updatePokemonScore();
-
-// Do not move the Pokémon while the user is scrolling on a phone.
-// Mobile browsers may report scrolling as a viewport resize, which would
-// otherwise make the hidden Pokémon jump to a new location.
-let lastViewportWidth = window.innerWidth;
-window.addEventListener('resize', () => {
-  if (window.innerWidth !== lastViewportWidth) {
-    lastViewportWidth = window.innerWidth;
-    movePokemonRandomly();
-  }
-});
 showPokemonMessage(
   'A Pokémon escaped from its field! Help me catch it and enjoy the hunt.'
 );
