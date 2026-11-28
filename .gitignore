@@ -33,3 +33,5 @@ ai-evidence/
 conversations/
 artifacts/
 *.zip
+
+presentation/*.mp4
