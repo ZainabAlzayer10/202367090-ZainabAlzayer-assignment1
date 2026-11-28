@@ -123,6 +123,116 @@ h2 {
   cursor: pointer;
 }
 
+.pokemon-score {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.pokeball-icon {
+  position: relative;
+  display: inline-block;
+  width: 1.35rem;
+  height: 1.35rem;
+  overflow: hidden;
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    var(--accent) 0 46%,
+    var(--text) 46% 54%,
+    var(--surface) 54% 100%
+  );
+  box-shadow: inset 0 0 0 2px var(--text);
+}
+
+.pokeball-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.52rem;
+  height: 0.52rem;
+  border: 2px solid var(--text);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 0 0 2px var(--surface);
+  transform: translate(-50%, -50%);
+}
+
+.pokemon-reset {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.pokemon-reset:hover,
+.pokemon-reset:focus-visible {
+  color: var(--accent);
+}
+
+.pokemon-target {
+  position: absolute;
+  z-index: 4;
+  display: grid;
+  width: 3.4rem;
+  height: 3.4rem;
+  padding: 0;
+  place-items: center;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: 0 10px 26px rgb(24 33 31 / 18%);
+  cursor: crosshair;
+  animation: pokemon-float 1.8s ease-in-out infinite;
+}
+
+.pokemon-target:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.pokemon-target img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.pokemon-target:hover {
+  transform: scale(1.12);
+}
+
+.pokemon-message {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 4;
+  max-width: 260px;
+  margin: 0;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 8px 20px rgb(24 33 31 / 12%);
+  font-size: 0.82rem;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.pokemon-message:not(:empty) {
+  opacity: 1;
+}
+
+@keyframes pokemon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
 .menu-toggle {
   display: none;
 }

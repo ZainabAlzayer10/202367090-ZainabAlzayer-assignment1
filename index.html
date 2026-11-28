@@ -55,11 +55,24 @@
           >
             ◐
           </button>
+
+          <div class="pokemon-score" aria-label="Pokémon caught counter">
+            <span class="pokeball-icon" aria-hidden="true">
+              <span class="pokeball-center"></span>
+            </span>
+            <span id="pokemon-score" aria-live="polite">0</span>
+            <button id="pokemon-reset" class="pokemon-reset" type="button" aria-label="Reset Pokémon caught counter" title="Reset counter">↻</button>
+          </div>
         </div>
       </nav>
     </header>
 
     <main>
+      <button id="pokemon-target" class="pokemon-target" type="button" aria-label="Catch the hidden Pokémon" title="Catch me">
+        <img id="pokemon-image" src="" alt="" aria-hidden="true">
+      </button>
+      <p id="pokemon-message" class="pokemon-message" role="status" aria-live="polite"></p>
+
       <!-- Hero section -->
       <section id="home" class="hero container">
         <div class="hero-copy">

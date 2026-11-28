@@ -8,6 +8,11 @@ const themeToggle = document.querySelector('#theme-toggle');
 const greeting = document.querySelector('#greeting');
 const contactForm = document.querySelector('#contact-form');
 const formMessage = document.querySelector('#form-message');
+const pokemonTarget = document.querySelector('#pokemon-target');
+const pokemonImage = document.querySelector('#pokemon-image');
+const pokemonScore = document.querySelector('#pokemon-score');
+const pokemonReset = document.querySelector('#pokemon-reset');
+const pokemonMessage = document.querySelector('#pokemon-message');
 
 const filterButtons = document.querySelectorAll('.filter-button');
 const projectCards = document.querySelectorAll(
@@ -91,6 +96,105 @@ themeToggle.addEventListener('click', () => {
     isDark ? 'Switch to light mode' : 'Switch to dark mode'
   );
 });
+
+// Catch the hidden Pokémon game
+const pokemonApiUrl =
+  'https://pokeapi.co/api/v2/pokemon/';
+
+let currentPokemon = null;
+
+let pokemonCaught = Number(
+  localStorage.getItem('pokemon-caught') || 0
+);
+
+function updatePokemonScore() {
+  pokemonScore.textContent = pokemonCaught;
+  localStorage.setItem('pokemon-caught', pokemonCaught);
+}
+
+function movePokemonRandomly() {
+  const pageWidth =
+    document.documentElement.scrollWidth;
+
+  const pageHeight =
+    document.documentElement.scrollHeight;
+
+  const maxLeft = Math.max(
+    12,
+    pageWidth - pokemonTarget.offsetWidth - 24
+  );
+
+  const maxTop = Math.max(
+    160,
+    pageHeight - pokemonTarget.offsetHeight - 24
+  );
+
+  const randomLeft =
+    Math.floor(Math.random() * maxLeft) + 12;
+
+  const randomTop =
+    Math.floor(Math.random() * (maxTop - 140)) + 140;
+
+  pokemonTarget.style.left =
+    `${randomLeft}px`;
+
+  pokemonTarget.style.top =
+    `${randomTop}px`;
+}
+
+async function loadRandomPokemon() {
+  pokemonTarget.disabled = true;
+
+  const randomId =
+    Math.floor(Math.random() * 151) + 1;
+
+  try {
+    const response = await fetch(
+      `${pokemonApiUrl}${randomId}`
+    );
+
+    if (!response.ok) {
+      throw new Error('Pokémon request failed');
+    }
+
+    currentPokemon = await response.json();
+
+    pokemonImage.src =
+      currentPokemon.sprites.front_default;
+
+    pokemonImage.alt =
+      `Hidden Pokémon: ${currentPokemon.name}`;
+
+    pokemonTarget.setAttribute(
+      'aria-label',
+      `Catch the hidden Pokémon ${currentPokemon.name}`
+    );
+
+    movePokemonRandomly();
+    pokemonTarget.disabled = false;
+  } catch (error) {
+    pokemonMessage.textContent =
+      'The Pokémon could not hide right now. Please try again.';
+  }
+}
+
+pokemonTarget.addEventListener('click', async () => {
+  pokemonCaught += 1;
+  updatePokemonScore();
+  pokemonMessage.textContent =
+    `Great catch! You caught ${currentPokemon.name}.`;
+  await loadRandomPokemon();
+});
+
+pokemonReset.addEventListener('click', () => {
+  pokemonCaught = 0;
+  updatePokemonScore();
+  pokemonMessage.textContent = 'The Pokémon counter has been reset.';
+});
+
+updatePokemonScore();
+window.addEventListener('resize', movePokemonRandomly);
+loadRandomPokemon();
 
 // Greeting based on time of day
 const hour = new Date().getHours();
@@ -183,6 +287,7 @@ async function loadGitHubProjects() {
     }
 
     applyGitHubSort(savedSort);
+    requestAnimationFrame(movePokemonRandomly);
   } catch (error) {
     githubLoading.hidden = true;
     githubError.hidden = false;
