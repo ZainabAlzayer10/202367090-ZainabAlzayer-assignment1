@@ -210,13 +210,12 @@ h2 {
 }
 
 .pokemon-message {
-  position: absolute;
-  top: calc(100% + 0.8rem);
-  left: 50%;
+  position: relative;
   z-index: 6;
-  width: min(360px, calc(100vw - 2rem));
-  max-width: calc(100vw - 2rem);
-  margin: 0;
+  display: block;
+  width: min(520px, calc(100% - 2rem));
+  max-width: 520px;
+  margin: 0.75rem auto 1rem;
   padding: 0.65rem 0.9rem;
   border: 1px solid var(--line);
   border-radius: 1.5rem;
@@ -226,7 +225,6 @@ h2 {
   font-size: 0.82rem;
   pointer-events: none;
   opacity: 0;
-  transform: translateX(-50%);
   transition: opacity 180ms ease;
 }
 
@@ -639,16 +637,12 @@ body.dark {
   }
 
   .pokemon-message {
-    position: fixed;
-    top: 31%;
-    right: 1rem;
-    left: 1rem;
-    width: auto;
-    max-width: none;
+    width: calc(100% - 2rem);
+    max-width: 520px;
+    margin: 0.75rem auto 1rem;
     padding: 0.75rem 1rem;
     font-size: 0.78rem;
     line-height: 1.45;
-    transform: none;
   }
 
   .nav-links.open {
